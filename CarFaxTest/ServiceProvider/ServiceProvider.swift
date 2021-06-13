@@ -25,7 +25,6 @@ class ServiceProvider<T: Service> {
                 case .success(let data):
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    decoder.dateDecodingStrategy = .iso8601
                     do {
                         let resp = try decoder.decode(decodeType, from: data)
                         completion(.success(resp))

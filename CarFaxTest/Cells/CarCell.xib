@@ -48,6 +48,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfd-0b-GVb">
                                         <rect key="frame" x="0.0" y="310" width="411" height="34"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="btnCallDealerAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="443-as-ToT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -73,6 +76,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="btnCallDealer" destination="dfd-0b-GVb" id="JQt-P5-kxr"/>
+                <outlet property="carImageView" destination="ZT9-iM-oDf" id="mFp-lf-R8m"/>
+                <outlet property="lblCar" destination="L3N-zP-UVG" id="sO5-qh-4gF"/>
+                <outlet property="lblCarInfo" destination="bsx-9J-52J" id="3BG-vB-TVW"/>
+                <outlet property="mainBackgroundView" destination="E60-Eq-d0g" id="T5X-J1-8e9"/>
+            </connections>
             <point key="canvasLocation" x="199.27536231884059" y="234.375"/>
         </tableViewCell>
     </objects>

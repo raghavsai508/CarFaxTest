@@ -12,6 +12,7 @@ struct CarContainer: Decodable {
 }
 
 struct Car: Decodable {
+    var imageUrl: String?
     var year: Int?
     var make: String?
     var model: String?
@@ -24,5 +25,35 @@ struct Car: Decodable {
     
     struct Dealer: Decodable {
         var phone: String?
+    }
+    
+    enum OuterKeys: String, CodingKey {
+        case year, make, model, trim, listPrice, mileage, city, state, dealer, images
+    }
+    
+    enum ImageKeys: String, CodingKey {
+        case firstPhoto
+    }
+    
+    enum FirstPhotoKeys: String, CodingKey {
+        case medium
+    }
+    
+    init(from decoder: Decoder) throws {
+        let outerContainer = try decoder.container(keyedBy: OuterKeys.self)
+        
+        year = try outerContainer.decodeIfPresent(Int.self, forKey: .year)
+        make = try outerContainer.decodeIfPresent(String.self, forKey: .make)
+        model = try outerContainer.decodeIfPresent(String.self, forKey: .model)
+        trim = try outerContainer.decodeIfPresent(String.self, forKey: .trim)
+        listPrice = try outerContainer.decodeIfPresent(Double.self, forKey: .listPrice)
+        mileage = try outerContainer.decodeIfPresent(Int.self, forKey: .mileage)
+        city = try outerContainer.decodeIfPresent(String.self, forKey: .city)
+        state = try outerContainer.decodeIfPresent(String.self, forKey: .state)
+        dealer = try outerContainer.decode(Dealer.self, forKey: .dealer)
+        
+        let imagesContainer = try outerContainer.nestedContainer(keyedBy: ImageKeys.self, forKey: .images)
+        let firstPhotoContainer = try imagesContainer.nestedContainer(keyedBy: FirstPhotoKeys.self, forKey: .firstPhoto)
+        imageUrl = try firstPhotoContainer.decodeIfPresent(String.self, forKey: .medium)
     }
 }
