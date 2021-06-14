@@ -10,11 +10,11 @@ import UIKit
 class CarListViewController: UIViewController {
 
     @IBOutlet weak var carTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let kCarCellIdentifier: String = String(describing: CarCell.self) // Cell Identifier
     private var cars: [Car]?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,23 +35,25 @@ class CarListViewController: UIViewController {
         carTableView.tableFooterView = UIView()
     }
 
+    /**
+     Responsible for loading cars from server.
+     */
     fileprivate func loadData() {
+        activityIndicator.startAnimating()
+
         let provider = ServiceProvider<CarService>()
         let carService = CarService(parameters: nil, httpMethod: .get, headers: nil)
         provider.load(service: carService, decodeType: CarContainer.self) { [weak self] (result) in
             
+            self?.activityIndicator.stopAnimating()
             switch result {
                 case .failure(let error):
                     print(error)
                 case .success(let carContainer):
                     self?.cars = carContainer.listings
-//                    print(self?.cars)
                     self?.carTableView.reloadData()
             }
-            
-            
         }
-        
     }
 
 }
@@ -82,7 +84,14 @@ extension CarListViewController: UITableViewDataSource {
 extension CarListViewController: CarDelegate {
     
     func callDealerAt(index: Int) {
-        print(index)
+        
+        let car = cars![index]
+        guard let phone = car.dealer.phone else { return }
+        guard let number = URL(string: "tel://\(phone)") else { return }
+        
+        if UIApplication.shared.canOpenURL(number) {
+            UIApplication.shared.open(number)
+        }
     }
     
     

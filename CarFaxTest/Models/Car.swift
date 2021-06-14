@@ -19,16 +19,16 @@ struct Car: Decodable {
     var trim: String?
     var listPrice: Double?
     var mileage: Int?
-    var city: String?
-    var state: String?
     var dealer: Dealer
     
     struct Dealer: Decodable {
         var phone: String?
+        var city: String?
+        var state: String?
     }
     
     enum OuterKeys: String, CodingKey {
-        case year, make, model, trim, listPrice, mileage, city, state, dealer, images
+        case year, make, model, trim, listPrice, mileage, dealer, images
     }
     
     enum ImageKeys: String, CodingKey {
@@ -48,8 +48,6 @@ struct Car: Decodable {
         trim = try outerContainer.decodeIfPresent(String.self, forKey: .trim)
         listPrice = try outerContainer.decodeIfPresent(Double.self, forKey: .listPrice)
         mileage = try outerContainer.decodeIfPresent(Int.self, forKey: .mileage)
-        city = try outerContainer.decodeIfPresent(String.self, forKey: .city)
-        state = try outerContainer.decodeIfPresent(String.self, forKey: .state)
         dealer = try outerContainer.decode(Dealer.self, forKey: .dealer)
         
         let imagesContainer = try outerContainer.nestedContainer(keyedBy: ImageKeys.self, forKey: .images)

@@ -20,17 +20,24 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="44M-A9-DY6">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="44M-A9-DY6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="B5Q-Yh-ugh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Onm-YG-uhx" secondAttribute="trailing" id="Ihr-px-BJE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Onm-YG-uhx" secondAttribute="bottom" id="J95-OK-CHA"/>
                             <constraint firstItem="Onm-YG-uhx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rxe-il-T52"/>
+                            <constraint firstItem="44M-A9-DY6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mXX-c0-sOn"/>
                             <constraint firstItem="Onm-YG-uhx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tTz-DS-gAn"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="44M-A9-DY6" id="Pcn-Pr-6oc"/>
                         <outlet property="carTableView" destination="Onm-YG-uhx" id="AGp-vO-bOH"/>
                     </connections>
                 </viewController>
